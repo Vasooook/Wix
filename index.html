@@ -12,16 +12,19 @@
     <div id="tooltip" class="tooltip"></div>
 
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.js"></script>
-    <script>
-        mapboxgl.accessToken = 'pk.eyJ1IjoidmFzb2s5NyIsImEiOiJjbTNkN20wbmgwMGR5MndzOGdlYnhzZ3BzIn0.1-q6qYsr2-RUv3otsLLQsQ';
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css" rel="stylesheet">
+<div id="map" style="width: 100vw; height: 100vh;"></div>
 
-        const map = new mapboxgl.Map({
-            container: 'map',
-            style: 'https://github.com/Vasooook/Wix/blob/main/style.json',
-            center: [0, 0],
-            zoom: 1,
-            projection: 'globe'
-        });
+<script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoidmFzb2s5NyIsImEiOiJjbTNkN20wbmgwMGR5MndzOGdlYnhzZ3BzIn0.1-q6qYsr2-RUv3otsLLQsQ';
+    const map = new mapboxgl.Map({
+        container: 'map',
+        style: 'https://вашusername.github.io/репозиторий/style.json', // URL вашего JSON файла
+        center: [0, 0],
+        zoom: 1,
+        projection: 'globe'
+    });
+</script>
 
         map.on('load', () => {
             map.addSource('countries', {
