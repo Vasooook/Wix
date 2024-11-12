@@ -6,14 +6,12 @@
     <title>Interactive Globe</title>
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css" rel="stylesheet">
     <style>
-        /* Убедитесь, что контейнер занимает всё окно */
         #map {
             width: 100vw;
             height: 100vh;
             margin: 0;
             padding: 0;
         }
-        /* Стиль для всплывающей подсказки */
         .tooltip {
             position: absolute;
             background-color: white;
@@ -30,28 +28,23 @@
     <div id="tooltip" class="tooltip"></div>
 
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.js"></script>
-
     <script>
-        // Ваш Mapbox access token
         mapboxgl.accessToken = 'pk.eyJ1IjoidmFzb2s5NyIsImEiOiJjbTNkN20wbmgwMGR5MndzOGdlYnhzZ3BzIn0.1-q6qYsr2-RUv3otsLLQsQ';
 
-        // Инициализация карты
         const map = new mapboxgl.Map({
             container: 'map',
-            style: 'https://Vasooook.github.io/Wix/style.json', // Замените на URL JSON файла, опубликованного через GitHub Pages
+            style: 'https://Vasooook.github.io/Wix/style.json', // URL на JSON-файл стиля, опубликованный через GitHub Pages
             center: [0, 0],
             zoom: 1,
-            projection: 'globe' // Это создаёт эффект глобуса
+            projection: 'globe'
         });
 
-        // Загрузка данных GeoJSON и добавление слоя карты
         map.on('load', () => {
             map.addSource('countries', {
                 'type': 'geojson',
                 'data': 'https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json'
             });
 
-            // Добавление цветного слоя для стран
             map.addLayer({
                 'id': 'country-fills',
                 'type': 'fill',
@@ -63,7 +56,6 @@
                 }
             });
 
-            // Добавление контура стран
             map.addLayer({
                 'id': 'country-borders',
                 'type': 'line',
@@ -75,7 +67,6 @@
                 }
             });
 
-            // Обработчик для отображения информации при наведении
             map.on('mousemove', 'country-fills', (e) => {
                 map.getCanvas().style.cursor = 'pointer';
 
@@ -83,10 +74,9 @@
                 tooltip.style.display = 'block';
                 tooltip.style.left = `${e.point.x + 10}px`;
                 tooltip.style.top = `${e.point.y + 10}px`;
-                tooltip.innerHTML = `<strong>${e.features[0].properties.name}</strong><br>GSM покрытие: Available`;
+                tooltip.innerHTML = `<strong>${e.features[0].properties.name}</strong><br>GSM coverage: Available`;
             });
 
-            // Убирает подсказку при выходе курсора
             map.on('mouseleave', 'country-fills', () => {
                 map.getCanvas().style.cursor = '';
                 document.getElementById('tooltip').style.display = 'none';
